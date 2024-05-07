@@ -8,7 +8,6 @@ var repeatedSubstringPattern = function(s) {
         str+=s[i]
         let len = s.length / str.length
         if(str.repeat(len) === s){
-            console.log(str.repeat(len), "here", s)
             return true
         }
     }
