@@ -10,8 +10,8 @@ var addStrings = function(num1, num2) {
     let arr = [];
 
     while (num1.length || num2.length) {
-        let elm1 = num1.pop() ?? 0;
-        let elm2 = num2.pop() ?? 0;
+        let elm1 = num1.pop() || 0;
+        let elm2 = num2.pop() || 0;
         let sum = String(+elm1 + +elm2 + +carry);
         carry = "0";
         if (sum >= 10) {
