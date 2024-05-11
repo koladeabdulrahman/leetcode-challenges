@@ -4,18 +4,17 @@
  * @return {boolean}
  */
 var canFormArray = function(arr, pieces) {
-    let piecewithStart = {}
-    let res = []
-    for(let piece of pieces){
-        let first = piece[0]
-        piecewithStart[first] = piece
+    let firsts = {}, res = []
+    for(let arr of pieces){
+        let first = arr[0]
+        firsts[first] = arr 
     }
     for(let i = 0; i<arr.length;){
-        let num = arr[i]
-        let piece = piecewithStart[num]
-        if(!piece)return false
-        res.push(...piece)
-        i+=piece.length
+        let chars = firsts[arr[i]]
+        console.log(chars)
+        if(!chars)return false
+        res.push(...chars)
+        i+=chars.length
     }
     return res.join("") === arr.join("")
 };
