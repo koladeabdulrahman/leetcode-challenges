@@ -4,16 +4,19 @@
  * @return {number[]}
  */
 var nextGreaterElement = function(nums1, nums2) {
-    const map ={}; // map for next greater element
-    const stack = [];
-    for (let num of nums2) {
-        while (stack.length && stack[stack.length - 1] < num) { 
-            map[stack.pop()] =  num;
+    let map = {}
+    let stack = [], res = []
+    for(let i = 0; i<nums2.length; i++){
+        let num = nums2[i]
+        while(stack.length && num>stack[stack.length - 1]){
+            let pop = stack.pop()
+            map[pop] = num
         }
-        stack.push(num);
+        stack.push(num)
     }
-    for (let i = 0; i < nums1.length; i++) { 
-        nums1[i] = map[nums1[i]] ? map[nums1[i]] : -1;
+    for(let i = 0; i<nums1.length; i++){
+        let num = nums1[i]
+        map[num]? res[i] = map[num]: res[i] = -1
     }
-    return nums1;
-}
+    return res
+};
