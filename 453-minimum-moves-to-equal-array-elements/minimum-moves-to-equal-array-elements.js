@@ -3,9 +3,9 @@
  * @return {number}
  */
 var minMoves = function(nums) {
-    let min = Math.min(...nums), result = 0
-    for(let i = 0; i<nums.length; i++){
-        result += nums[i] - min
+    let min = Math.min(...nums), res = 0
+    for(let num of nums){
+        res+=num-min
     }
-    return result
+    return res
 };
