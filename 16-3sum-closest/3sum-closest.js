@@ -18,10 +18,6 @@ var threeSumClosest = function(nums, target) {
                 min = diff
                 res = nums[start] + nums[i] + nums[end]
             }
-            // if(sum == target){
-            //     start++
-            //     end--
-            // }
             else if (sum > tag) end--
             else start++
         }
