@@ -3,10 +3,10 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var sortColors = function(nums) {
-    let start = 0, end = nums.length - 1, index = 0
-    while(index<=end && start<end){
+    let start = 0, index = 0, end = nums.length - 1
+    while(index <= end && start<end){
         if(nums[index] == 0){
-            swap(nums, start, index)
+            swap(nums, index, start)
             start++
             index++
         }
@@ -16,8 +16,10 @@ var sortColors = function(nums) {
         }
         else index++
     }
+    
 };
 
-function swap(arr, idx1, idx2){
-    [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]]
+function swap(arr, start, end){
+    [arr[start], arr[end]] = [arr[end], arr[start]]
 }
+
