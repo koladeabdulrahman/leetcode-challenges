@@ -10,7 +10,6 @@ var threeSumClosest = function(nums, target) {
 
     for(let i = 0; i<nums.length; i++){
         let tag = target - nums[i]
-        // nums[start] + nums[end] = target - nums[i]
         let [start, end] = [i+1, nums.length - 1]
         while(start<end){
             let sum = nums[start] + nums[end]
@@ -18,8 +17,6 @@ var threeSumClosest = function(nums, target) {
             if(diff < min) {
                 min = diff
                 res = nums[start] + nums[i] + nums[end]
-                // start++
-                // end--
             }
             if(sum == target){
                 start++
