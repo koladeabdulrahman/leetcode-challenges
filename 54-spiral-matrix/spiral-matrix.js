@@ -5,10 +5,10 @@
 var spiralOrder = function(matrix) {
     let top = 0
     let right = matrix[0].length - 1
-    let bottom = matrix.length - 1
+    let bottom  = matrix.length - 1
     let left = 0
-    let size = matrix.length * matrix[0].length
     let res = []
+    let size = matrix[0].length * matrix.length
     while(res.length < size){
         // top row, left to right
         for(let col = left; col<=right && res.length < size; col++){
