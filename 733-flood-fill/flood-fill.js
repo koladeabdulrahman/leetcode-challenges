@@ -6,27 +6,30 @@
  * @return {number[][]}
  */
 var floodFill = function(image, sr, sc, color) {
-    let [m,n] = [image.length, image[0].length]
-    let visited = Array.from({length:m}, ()=>new Array(n).fill(false)) 
-    let prevColor = image[sr][sc]
-    let dirs = [[1,0],[0,1],[-1, 0], [0,-1]]
-    function dfs(grid, row, col){
-        if(!isValid(grid, row, col))return
-        visited[row][col] = true
-        grid[row][col] = color
-        for(let [x,y] of dirs){
-            let nr = x+row
-            let nc = y+col
-            dfs(grid, nr, nc)
-        }
-    }
+    if(image[sr][sc] == color) return image
+
+    let oldColor = image[sr][sc]
 
     function isValid(grid, row, col){
-        return row>=0 && row<m && col>=0 && col<n && !visited[row][col] && grid[row][col] == prevColor
+        return row<grid.length && row >= 0 && col >=0 && col<grid[0].length && grid[row][col] == oldColor && !visited[row][col]
     }
 
-    dfs(image, sr,sc)
+    let visited = Array.from({length: image.length}, 
+    ()=>new Array(image[0].length).fill(false))
+
+    let dirs = [[0,1],[0,-1],[1,0],[-1,0]]
+
+    function bfs(grid, row, col){
+        if(!isValid(grid, row, col))return
+        console.log(row, col)
+        grid[row][col] = color
+        visited[row][col] = true
+        for(let [r,c] of dirs){
+            let nr = r + row
+            let nc = c + col
+            bfs(grid, nr, nc)
+        }
+    }
+    bfs(image, sr, sc)
     return image
 };
-
-
