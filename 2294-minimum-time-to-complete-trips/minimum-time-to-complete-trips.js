@@ -1,10 +1,11 @@
 var minimumTime = function(time, totalTrips) {
     let low = 1;
-    let high = Number.MAX_SAFE_INTEGER;
+    let high = Math.min(...time) * totalTrips
     let ans = 0;
     
     while(low <= high) {
         let mid = Math.floor(low + (high - low) / 2); // to prevent overflow
+        console.log(mid)
         
         if(isPossible(time, mid, totalTrips)) {
             ans = mid
