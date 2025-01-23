@@ -5,23 +5,22 @@
  */
 var minEatingSpeed = function(piles, h) {
     piles.sort((a,b)=>a-b)
-    let min = 1
-    let max = Math.max(...piles)
+    let min = 1, max = Math.max(...piles), ans
     while(min<=max){
         let mid = Math.floor((min+max)/2)
         if(canEat(piles, mid, h)){
-            res = mid
+            ans = mid
             max = mid - 1
         }
-        else if(!canEat(piles, mid, h))min = mid + 1
+        else min = mid + 1
     }
-    return res
+    return ans
 };
 
-function canEat(pile, speed, time){
-    let res = 0
-    for(let h of pile){
-        res+= Math.ceil(h/speed)
+function canEat(bananas, speed, time){
+    let totalTime = 0
+    for(let ban of bananas){
+        totalTime+= Math.ceil(ban/speed)
     }
-    return res<=time
+    return totalTime <= time
 }
