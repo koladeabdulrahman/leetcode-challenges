@@ -4,14 +4,13 @@
  * @return {number}
  */
 var minSteps = function(s, t) {
-    let sCount = {}
-    for(let char of t){
-        sCount[char]? sCount[char]++: sCount[char] = 1
-    }
-    let count = 0
+    let mapS = {}, count = 0
     for(let char of s){
-        if(!sCount[char])count++
-        else sCount[char]-=1
+        mapS[char]? mapS[char]++: mapS[char] = 1
+    }
+    for(let char of t){
+        if(!mapS[char])count++
+        else mapS[char]--
     }
     return count
 };
