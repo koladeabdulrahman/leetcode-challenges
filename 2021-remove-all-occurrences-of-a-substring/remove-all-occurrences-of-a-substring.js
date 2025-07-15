@@ -4,10 +4,17 @@
  * @return {string}
  */
 var removeOccurrences = function(s, part) {
-    while(s.includes(part)){
-        let index = s.indexOf(part)
-        let temp = s.slice(0,index) + s.slice(index+part.length)
-        s = temp
+    let stack = []
+    for(let char of s){
+        stack.push(char)
+        let word = stack.slice(stack.length - part.length).join("")
+        if(word === part){
+            let n = part.length
+            while(n > 0){
+                stack.pop()
+                n--
+            }
+        }
     }
-    return s
+    return stack.join("")
 };
