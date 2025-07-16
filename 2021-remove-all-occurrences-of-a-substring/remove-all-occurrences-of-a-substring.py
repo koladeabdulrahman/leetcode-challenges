@@ -1,8 +1,14 @@
 class Solution:
     def removeOccurrences(self, s: str, part: str) -> str:
-        while(part in s):
-            index = s.find(part)
-            temp = s[:index]+ s[index+len(part):]
-            s = temp
-        return s
+        lastChar = part[-1]
+        stack = []
+        for char in s:
+            stack.append(char)
+            if(len(stack) >= len(part)) and (char == lastChar):
+                if "".join(stack[-len(part):]) == part:
+                    n = len(part)
+                    while n>0:
+                        stack.pop()
+                        n-=1
+        return "".join(stack)
         
