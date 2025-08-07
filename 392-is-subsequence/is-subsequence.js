@@ -5,8 +5,9 @@
  */
 var isSubsequence = function(s, t) {
     let slow = 0
-    for(let i = 0; i<t.length; i++){
-        if(t[i] == s[slow])slow++
+    for(let char of t){
+        if(char === s[slow])
+        slow++
     }
-    return slow == s.length
+    return slow === s.length
 };
