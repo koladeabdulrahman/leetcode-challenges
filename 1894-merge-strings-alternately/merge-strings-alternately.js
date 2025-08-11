@@ -5,10 +5,8 @@
  */
 var mergeAlternately = function(word1, word2) {
     let res = ""
-    let len = Math.max(word1.length, word2.length)
-    for(let i = 0; i<len; i++){
-        res+=word1[i] || ""
-        res+=word2[i] || ""
+    for(let i = 0; i<Math.max(word1.length, word2.length); i++){
+        res+= (word1[i] || "") + (word2[i] || "")
     }
     return res
 };
