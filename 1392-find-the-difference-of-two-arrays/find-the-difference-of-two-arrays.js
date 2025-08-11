@@ -4,19 +4,16 @@
  * @return {number[][]}
  */
 var findDifference = function(nums1, nums2) {
-    let ans1 = new Set()
-    let ans2 = new Set()
-
-    let ans1map = {}
-    let ans2map = {}
-
-    for(let num of nums1)ans1map[num] = true
-    for(let num of nums2)ans2map[num] = true
-
-    for(let num of nums1)!ans2map[num] && ans1.add(num)
-    for(let num of nums2)!ans1map[num] && ans2.add(num)
-
-    let ans = [Array.from(ans1), Array.from(ans2)]
-
-    return ans
+    let set1 = new Set(...[nums2])
+    let set2 = new Set(...[nums1])
+    let result = []
+    let res1 = []
+    let res2 = []
+    for(let char of set2){
+        if(!set1.has(char))res1.push(char)
+    }
+    for(let char of set1){
+        if(!set2.has(char))res2.push(char)
+    }
+    return [res1, res2]
 };
