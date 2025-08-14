@@ -3,13 +3,12 @@
  * @return {number}
  */
 var maxArea = function(height) {
-    let [start, end] = [0, height.length - 1]
     let max = 0
+    let start = 0, end = height.length - 1
     while(start<end){
-        let [length, breadth] = [end-start, Math.min(height[start], height[end])]
-        let area = length * breadth
+        let area = (Math.min(height[start], height[end])) * (end - start)
         max = Math.max(max, area)
-        if(height[end] > height[start])start++
+        if(height[start] < height[end])start++
         else end--
     }
     return max
