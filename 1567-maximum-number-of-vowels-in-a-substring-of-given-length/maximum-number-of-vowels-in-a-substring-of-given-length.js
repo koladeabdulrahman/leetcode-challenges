@@ -4,29 +4,16 @@
  * @return {number}
  */
 var maxVowels = function(s, k) {
-    let window = ""
-    function isVowel(char){
-        let chars = {"a":true, "e":true, "i":true, "o":true, "u":true}
-        return chars[char] !== undefined
-    }
-
+    let vowels = new Set(['a', 'e', 'i', 'o', 'u'])
     let count = 0
-
     for(let i = 0; i<k; i++){
-        if(isVowel(s[i]))count++
-        window+= s[i]
+        if(vowels.has(s[i]))count++
     }
-
     let max = count
     for(let i = k; i<s.length; i++){
-        let char = s[i]
-        if(isVowel(char)){
-            count++
-        }
-        if(isVowel(s[i - k])){
-            count--
-        }
-        max = Math.max(count, max)
+        if(vowels.has(s[i]))count++
+        if(vowels.has(s[i-k]))count--
+        max = Math.max(max, count)
     }
     return max
 };
