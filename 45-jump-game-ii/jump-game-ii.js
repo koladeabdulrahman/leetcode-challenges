@@ -3,13 +3,13 @@
  * @return {number}
  */
 var jump = function(nums) {
-    let min = 0, max = 0
-    for(let end = 0; end<nums.length - 1;){
-        for(let i = 0; i<=end; i++){
-            max = Math.max(max, nums[i]+i)
+    let jump = 0, max = 0, oldmax = 0
+    for(let i = 0; i<nums.length-1; i++){
+        max = Math.max(max, i+nums[i])
+        if(i >= oldmax){
+            jump++
+            oldmax = max
         }
-        min++
-        end = max
     }
-    return min
+    return jump
 };
