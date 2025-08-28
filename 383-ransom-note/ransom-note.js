@@ -4,14 +4,13 @@
  * @return {boolean}
  */
 var canConstruct = function(ransomNote, magazine) {
-    if (magazine.length < ransomNote.length) return false
-    let mag = {}
+    let map = {}
     for(let char of magazine){
-        mag[char]? mag[char]++: mag[char] = 1
+        map[char]? map[char]++: map[char] = 1
     }
     for(let char of ransomNote){
-        if(mag[char])mag[char]--
-        else return false
+        if(!map[char])return false
+        map[char]--
     }
     return true
 };
