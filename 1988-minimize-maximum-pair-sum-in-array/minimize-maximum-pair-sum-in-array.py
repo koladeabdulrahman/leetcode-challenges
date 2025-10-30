@@ -1,5 +1,6 @@
 class Solution:
     def minPairSum(self, nums: List[int]) -> int:
+        if not nums : return 0
         min_sum = -float("inf")
         start, end = 0, len(nums) - 1
         nums = sorted(nums)
