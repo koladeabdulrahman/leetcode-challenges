@@ -1,23 +1,30 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        if len(p) > len(s) : return []
-
-        pCount, sCount = {}, {}
-
-        for i in range(len(p)) :
-            pCount[p[i]] = pCount.get(p[i], 0) + 1
-            sCount[s[i]] = sCount.get(s[i], 0) + 1
-        res = [0] if sCount == pCount else []
-
-        l = 0
-        for r in range(len(p), len(s)) : 
-            sCount[s[r]] = sCount.get(s[r], 0) + 1
-            sCount[s[l]] -= 1
-
-            if sCount[s[l]] == 0 : sCount.pop(s[l])
-            l+=1
-            if sCount == pCount : res.append(l)
-
+        p,s = s,p
+        if len(p) < len(s) : return []
+        res = []
+        charsA = {}
+        for char in s: charsA[char] = charsA.get(char, 0) + 1
+        charsB = {}
+        for i in range(len(s)) : 
+            if (p[i]) in charsA :
+                charsB[p[i]] = charsB.get(p[i], 0) + 1
+        if len(charsA) == len(charsB) : 
+            count = 0
+            for char in charsA : 
+                if charsA[char] == charsB[char] : count+=1
+            if count == len(charsA) : res.append(i-len(s)+1)
+        for i in range(len(s), len(p)) : 
+            if (p[i]) in charsA : charsB[p[i]] = charsB.get(p[i], 0) + 1
+            prev = i - len(s)
+            if p[prev] in charsB : 
+                charsB[p[prev]]-=1
+                if charsB[p[i- len(s)]] == 0 : del charsB[p[i-len(s)]]
+            if len(charsA) == len(charsB) : 
+                count = 0
+                for char in charsA : 
+                    if charsA[char] == charsB[char] : count+=1
+                if count == len(charsA) : res.append(i-len(s)+1)
         return res
 
 
