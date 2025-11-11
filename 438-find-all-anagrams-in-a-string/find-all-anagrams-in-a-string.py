@@ -1,30 +1,33 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        p,s = s,p
-        if len(p) < len(s) : return []
         res = []
-        charsA = {}
-        for char in s: charsA[char] = charsA.get(char, 0) + 1
-        charsB = {}
+        s,p = p, s
+        if len(s) > len(p) : return []
+        scount, pcount = [0] * 26 , [0] * 26
         for i in range(len(s)) : 
-            if (p[i]) in charsA :
-                charsB[p[i]] = charsB.get(p[i], 0) + 1
-        if len(charsA) == len(charsB) : 
-            count = 0
-            for char in charsA : 
-                if charsA[char] == charsB[char] : count+=1
-            if count == len(charsA) : res.append(i-len(s)+1)
-        for i in range(len(s), len(p)) : 
-            if (p[i]) in charsA : charsB[p[i]] = charsB.get(p[i], 0) + 1
-            prev = i - len(s)
-            if p[prev] in charsB : 
-                charsB[p[prev]]-=1
-                if charsB[p[i- len(s)]] == 0 : del charsB[p[i-len(s)]]
-            if len(charsA) == len(charsB) : 
-                count = 0
-                for char in charsA : 
-                    if charsA[char] == charsB[char] : count+=1
-                if count == len(charsA) : res.append(i-len(s)+1)
+            scount[ord(s[i]) - ord("a")]+=1
+            pcount[ord(p[i]) - ord("a")]+=1
+        matches = 0
+        for i in range(26) : 
+            if scount[i] == pcount[i] : matches +=1
+        
+        l = 0
+        if matches == 26 : res.append(l)
+        for r in range(len(s), len(p)) : 
+            index = ord(p[r]) - ord("a")
+            pcount[index]+=1
+
+            if scount[index] == pcount[index] : matches+=1
+            elif scount[index] == pcount[index] - 1 : matches-=1
+
+            index = ord(p[l]) - ord("a")
+            pcount[index] -=1
+
+            if scount[index] == pcount[index] : matches+=1
+            elif scount[index] == pcount[index] + 1 : matches-=1
+
+            l+=1
+            if matches == 26 : res.append(l)
         return res
 
 
