@@ -4,27 +4,45 @@
  * @return {boolean}
  */
 var checkInclusion = function(s1, s2) {
-    let count = 0, left = 0, map = {}
-    for(let char of s1){
-        map[char]? map[char]++: map[char] = 1
+    let count = 0;
+    let map = {};
+    for (let char of s1) {
+        map[char] ? map[char]++ : map[char] = 1;
     }
 
-    let right = 0
-    while (right<s2.length){
-        let char = s2[right]
-        if(map[char] > 0){
-            count++
+    // First loop to process the initial window
+    for (let right = 0; right < s1.length; right++) {
+        let char = s2[right];
+        if (map[char] > 0) {
+            count++;
         }
-        if (char in map) map[char]--
-        right++
-        if(count == s1.length)return true
-        if(right - left === s1.length){
-            if(map[s2[left]] >= 0){
-                count--
-            }
-            if (s2[left] in map) map[s2[left]]++
-            left++
+        if (char in map) {
+            map[char]--;
         }
     }
-    return count == s1.length
+    if (count === s1.length) return true;
+
+    // Second loop to slide the window
+    for (let right = s1.length; right < s2.length; right++) {
+        let char = s2[right];
+        // Add the new character
+        if (map[char] > 0) {
+            count++;
+        }
+        if (char in map) {
+            map[char]--;
+        }
+        // Remove the old character
+        let left = right - s1.length;
+        let char_left = s2[left];
+        if (map[char_left] >= 0) {
+            count--;
+        }
+        if (char_left in map) {
+            map[char_left]++;
+        }
+        // Check if match
+        if (count === s1.length) return true;
+    }
+    return false;
 };
