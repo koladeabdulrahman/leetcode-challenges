@@ -22,6 +22,7 @@ var findAnagrams = function(s, p) {
             map[char]--;
         }
     }
+    console.log(map)
     if (count === p.length) result.push(0);
 
     // Second loop to slide the window
@@ -38,6 +39,7 @@ var findAnagrams = function(s, p) {
         let left = right - p.length;
         let char_left = s[left];
         if (map[char_left] >= 0) {
+            console.log(map[char_left])
             count--;
         }
         if (char_left in map) {
