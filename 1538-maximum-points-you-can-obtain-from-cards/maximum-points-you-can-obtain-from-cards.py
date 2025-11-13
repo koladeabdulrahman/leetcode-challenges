@@ -4,6 +4,7 @@ class Solution:
         total = sum(cardPoints[right:])
         res = total
         while right < len(cardPoints) : 
+            print(right - left)
             total+=cardPoints[left] - cardPoints[right]
             res = max(res, total)
             left+=1
