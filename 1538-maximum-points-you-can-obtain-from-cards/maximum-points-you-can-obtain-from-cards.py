@@ -1,13 +1,9 @@
 class Solution:
     def maxScore(self, cardPoints: List[int], k: int) -> int:
-        left, right = 0, len(cardPoints) - k
-        total = sum(cardPoints[right:])
+        r =  len(cardPoints) - k
+        total = sum(cardPoints[r:])
         res = total
-        while right < len(cardPoints) : 
-            print(right - left)
-            total+=cardPoints[left] - cardPoints[right]
+        for right in range(r, len(cardPoints)) : 
+            total+=cardPoints[right - r] - cardPoints[right]
             res = max(res, total)
-            left+=1
-            right+=1
         return res
-        
