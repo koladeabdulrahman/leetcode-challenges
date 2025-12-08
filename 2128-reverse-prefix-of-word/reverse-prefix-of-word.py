@@ -1,12 +1,10 @@
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
-        if not word : return word
-        k = word.index(ch) if ch in word else -1
-        if k == -1 : return word
+        if not word or ch not in word : return word
+        index = word.index(ch)
         word = list(word)
-        start, end = 0, k
-        while start < end :
+        start, end = 0, index
+        while start < end : 
             word[start], word[end] = word[end], word[start]
             start+=1; end-=1
         return "".join(word)
-        
